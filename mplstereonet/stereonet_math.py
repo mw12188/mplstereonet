@@ -191,6 +191,22 @@ def pole(strike, dip):
     lon, lat = _rotate(lon, lat, strike)
     return lon, lat
 
+def Ppoint(strike, dip):
+    """
+    Calculates the longitude and latitude of points that you describe with an
+    	azimuth and plunge
+    Can use ax.line(plunge, azimuth, marker='o') instead! GRRRR 
+    	Written by Matt Wilks 31/8/15
+    """
+    strike, dip = np.atleast_1d(strike, dip)
+    mask = dip > 90
+    dip[mask] = 180 - dip[mask]
+    strike[mask] += 180
+    # Plot the approriate point for a strike of 0 and rotate it
+    lon, lat = 90-dip, 0
+    lon, lat = _rotate(lon, lat, strike-90)
+    return lon, lat
+    
 def rake(strike, dip, rake_angle):
     """
     Calculates the longitude and latitude of the linear feature(s) specified by
