@@ -292,7 +292,14 @@ class StereonetAxes(LambertAxes):
         lon, lat = stereonet_math.pole(strike, dip)
         args, kwargs = self._point_plot_defaults(args, kwargs)
         return self.plot(lon, lat, *args, **kwargs)
-
+    
+    def Ppoint(self, strike, dip, *args, **kwargs):
+        """
+        Plot points representing poles to planes on the axes. Additional
+        """
+        lon, lat = stereonet_math.Ppoint(strike, dip)
+        args, kwargs = self._point_plot_defaults(args, kwargs)
+        return self.plot(lon, lat, *args, **kwargs)
     def rake(self, strike, dip, rake_angle, *args, **kwargs):
         """
         Plot points representing lineations along planes on the axes.
